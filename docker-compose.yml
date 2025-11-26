@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+ app:
+  build:
+   context: .
+   dockerfile: Dockerfile
+  container_name: absenq
+  ports:
+   - "8000:80"
+  volumes:
+   - .:/var/www/html
+   - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+  restart: always
