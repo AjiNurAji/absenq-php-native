@@ -1,0 +1,17 @@
+{
+    "name": "ajinuraji/absenq",
+    "description": "Attendance app with QR Code",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "AjiNurAji",
+            "email": "ajinuraji090306@gmail.com"
+        }
+    ],
+    "require": {}
+}
