@@ -6,7 +6,7 @@ use PDO;
 
 class Model
 {
-  protected static ?PDO $db;
+  protected static ?PDO $db = null;
 
   public static function db(): PDO
   {
