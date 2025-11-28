@@ -6,17 +6,23 @@ use App\Core\Model;
 
 class Attendance extends Model
 {
-  public static function log(string $student_id, string $schedule_id, $status)
-  {
-    $sql = "INSERT INTO attendances (student_id, schedule_id, status, timestamp) 
-            VALUES (:student_id, :schedule_id, :status, NOW())";
+  // public static function log(string $student_id, string $schedule_id, $status)
+  // {
+  //   $sql = "INSERT INTO attendances (student_id, schedule_id, status, timestamp) 
+  //           VALUES (:student_id, :schedule_id, :status, NOW())";
 
+  //   $stmt = self::db()->prepare($sql);
+  //   return $stmt->execute([
+  //     'student_id' => $student_id,
+  //     'schedule_id' => $schedule_id,
+  //     'status' => $status
+  //   ]);
+  // }
+  public static function log($studentId)
+  {
+    $sql = "INSERT INTO attendance (student_id, time) VALUES (:student_id, NOW())";
     $stmt = self::db()->prepare($sql);
-    return $stmt->execute([
-      'student_id' => $student_id,
-      'schedule_id' => $schedule_id,
-      'status' => $status
-    ]);
+    return $stmt->execute(['student_id' => $studentId]);
   }
 
   public static function listBySchedule(string $schedule_id)

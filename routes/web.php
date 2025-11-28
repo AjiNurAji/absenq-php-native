@@ -11,3 +11,4 @@ Router::get('/', function () {
 Router::get("/dashboard", [DashboardController::class, "index"]);
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/attendance.php';

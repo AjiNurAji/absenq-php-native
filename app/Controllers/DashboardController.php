@@ -14,8 +14,14 @@ class DashboardController extends Controller
       self::redirect("/login");
       return;
     }
+    
+    if(isset($_SESSION["username"])) {
+      return View::render("dashboard/index", [
+        "title" => "Dashboard - AbsenQ",
+      ]);
+    }
 
-    return View::render("dashboard/index", [
+    return View::render("student/home", [
       "title" => "Dashboard - AbsenQ",
     ]);
   }

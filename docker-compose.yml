@@ -6,6 +6,7 @@ services:
    context: .
    dockerfile: Dockerfile
   container_name: absenq
+  image: php:8.4-apache
   ports:
    - "8000:80"
   volumes:

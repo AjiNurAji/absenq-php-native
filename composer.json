@@ -19,5 +19,7 @@
 			"name": "IndahSuciRamadani"
 		}
 	],
-	"require": {}
+	"require": {
+		"endroid/qr-code": "^6.1"
+	}
 }
