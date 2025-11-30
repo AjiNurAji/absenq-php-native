@@ -5,7 +5,7 @@ USE absenq;
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
-    type ENUM('admin','employee'),
+    role ENUM('admin','employee'),
     password VARCHAR(255)
 );
 

@@ -113,6 +113,47 @@ class StudentController extends Controller
     }
   }
 
+  public function edit(string $id)
+  {
+    // find student
+    $student = Student::get($id);
+
+    return View::render("student/edit/index", [
+      "classes" => Classes::all(),
+      "title" => "AbsenQ - Edit Mahasiswa",
+      "titleHeader" => "Edit Mahasiswa",
+      "data" => $student
+    ]);
+  }
+
+  public function update(string $id)
+  {
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+      http_response_code(405);
+      exit("Method not allowed");
+    }
+
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    try {
+      Student::update($id, [
+        "name" => $data["name"],
+        "class_id" => $data["class_id"],
+        "password" => $data["password"],
+      ]);
+
+      return self::json([
+        "status" => "success",
+        "message" => "Berhasil mengubah data mahasiswa",
+      ]);
+    } catch (\PDOException $e) {
+      return self::json([
+        "status" => "error",
+        "message" => "Gagal mengubah data mahasiswa, silahkan coba lagi!",
+      ]);
+    }
+  }
+
   public static function list()
   {
     return self::json(Student::all());

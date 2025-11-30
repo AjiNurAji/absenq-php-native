@@ -38,6 +38,32 @@ class Student extends Model
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
+  public static function update(string $id, array $data)
+  {
+
+    // if password empty and same
+    if (empty($data["password"]) || $data["password"] == null || password_verify($data["password"], self::get($id)->password)) {
+      unset($data["password"]);
+    }
+
+    // if password not empty
+    if (!empty($data["password"])) {
+      $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
+
+      $sql = "UPDATE students SET name = :name, class_id = :class_id, password = :password WHERE student_id = :student_id";
+      $stmt = self::db()->prepare($sql);
+      $stmt->execute(array_merge($data, ['student_id' => $id]));
+    }
+
+    // if password empty
+    else {
+      $sql = "UPDATE students SET name = :name, class_id = :class_id WHERE student_id = :student_id";
+      $stmt = self::db()->prepare($sql);
+      $stmt->execute(array_merge($data, ['student_id' => $id]));
+    }
+
+  }
+
   public static function getWithClass()
   {
     // get students with class name and hiiden password
