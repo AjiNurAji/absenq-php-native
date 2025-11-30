@@ -5,14 +5,8 @@
   <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md text-center">
 
     <div class="flex justify-center mb-4">
-      <div class="bg-blue-100 p-3 rounded-xl border border-blue-200">
-        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <rect x="5" y="5" width="4" height="4" />
-          <rect x="5" y="15" width="4" height="4" />
-          <rect x="15" y="5" width="4" height="4" />
-          <rect x="15" y="15" width="4" height="4" />
-          <rect x="10" y="10" width="4" height="4" />
-        </svg>
+      <div class="bg-blue-100 p-3 rounded-xl border border-blue-200 text-blue-600">
+        <i data-lucide="qr-code"></i>
       </div>
     </div>
 
@@ -35,7 +29,7 @@
           name="password"
           id="password"
           class="w-full p-3 border border-gray-300 rounded-lg pr-10 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-          placeholder="Masukkan password Anda"
+          placeholder="Masukkan kata sandi Anda"
           required />
         <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-blue-600">
           <i id="eye-icon" class="fas fa-eye-slash"></i>

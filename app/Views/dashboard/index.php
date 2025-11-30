@@ -7,7 +7,7 @@
       <span class="text-gray-500 text-sm font-medium">Total Mahasiswa</span>
       <i class="fa-regular fa-user text-gray-400"></i>
     </div>
-    <div class="text-3xl font-bold text-gray-800 mb-1">150</div>
+    <div class="text-3xl font-bold text-gray-800 mb-1"><?= $count_of_student ?></div>
     <div class="text-xs text-gray-500">Terdaftar aktif</div>
   </div>
 

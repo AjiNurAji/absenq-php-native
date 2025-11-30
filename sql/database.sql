@@ -5,6 +5,7 @@ USE absenq;
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
+    type ENUM('admin','employee'),
     password VARCHAR(255)
 );
 
@@ -36,7 +37,7 @@ CREATE TABLE attendance (
     schedule_id INT,
     type ENUM('in','out'),
     time DATETIME,
-    FOREIGN KEY (student_id) REFERENCES students(student_id),
-    FOREIGN KEY (schedule_id) REFERENCES schedules(id)
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (schedule_id) REFERENCES schedules(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

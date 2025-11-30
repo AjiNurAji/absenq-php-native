@@ -12,7 +12,7 @@ class AuthController extends Controller
   public function login()
   {
     // If user is already logged in, redirect to dashboard
-    if (isset($_SESSION["username"]) || isset($_SESSION["student_id"])) {
+    if (isset($_SESSION["user"])) {
       self::redirect("/dashboard");
       return;
     }
@@ -29,7 +29,7 @@ class AuthController extends Controller
       self::redirect("/login");
       return;
     }
-
+    
     $post = json_decode(file_get_contents("php://input"), true);
 
     // Handle login logic here
@@ -40,8 +40,11 @@ class AuthController extends Controller
 
     if ($user && password_verify($password, $user->password)) {
       // Successfull login
-      $_SESSION["username"] = $user->username;
-      
+      $_SESSION["user"] = [
+        "name" => $user->username,
+        "role" => $user->role ?? "admin"
+      ];
+
       return self::json([
         "status" => "success",
         "message" => "Login berhasil"
@@ -52,9 +55,10 @@ class AuthController extends Controller
     $student = Student::get($username);
     if ($student && password_verify($password, $student->password)) {
       // Successfull login
-      $_SESSION["student_id"] = [
+      $_SESSION["user"] = [
         "name" => $student->name,
-        "student_id" => $student->student_id
+        "student_id" => $student->student_id,
+        "role" => "student"
       ];
 
       return self::json([

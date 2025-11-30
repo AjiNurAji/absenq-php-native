@@ -1,5 +1,9 @@
 </body>
 <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script>
   const lenis = new Lenis({

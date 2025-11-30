@@ -5,7 +5,7 @@
 
   <h2 class="text-xl font-bold text-gray-800 mb-8">
     <i class="fa-solid fa-layer-group text-blue-600 mr-2"></i>
-    <?= !is_array($auth) ? "Admin" : "User" ?> Panel
+    <?= $auth["role"] === "admin" ? "Admin" : "User" ?> Panel
   </h2>
 
   <nav class="flex-1">
@@ -18,7 +18,7 @@
       </li>
 
       <?php
-      if ($auth && !is_array($auth)) {
+      if ($auth["role"] === "admin") {
         include __DIR__ . "/admin/sidebar.php";
       } else {
         include __DIR__ . "/student/sidebar.php";
