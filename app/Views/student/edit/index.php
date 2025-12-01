@@ -21,7 +21,8 @@
         required value="<?= $data->class_id ?>">
         <option value="null" selected disabled>Pilih kelas</option>
         <?php foreach ($classes as $class): ?>
-          <option aria-selected="<?= $data->class_id == $class->id ?>" <?= $data->class_id == $class->id ? "selected" : "" ?> value="<?= $class->id ?>"><?= $class->class_name ?></option>
+          <option aria-selected="<?= $data->class_id == $class->id ?>" <?= $data->class_id == $class->id ? "selected" : "" ?>
+            value="<?= $class->id ?>"><?= $class->class_name ?></option>
         <?php endforeach; ?>
       </select>
 
@@ -42,6 +43,7 @@
   </div>
 </div>
 
+<?php include __DIR__ . "/../../layout/footerByAji.php" ?>
 <?php include __DIR__ . "/../../layout/dashboard/bottom.php"; ?>
 <script>
   const addForm = document.getElementById("student-form");
@@ -70,8 +72,6 @@
     if (res.ok) {
       button.disabled = false;
       button.innerText = "Ubah";
-
-      addForm.reset();
 
       Toastify({
         text: result.message,

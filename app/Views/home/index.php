@@ -117,10 +117,6 @@
 </main>
 
 <!-- Langkah 4: Footer -->
-<footer
-  class="flex md:flex-row flex-col w-full justify-center md:justify-between px-4 align-center py-6 text-center bg-gray-50">
-  <p class="text-sm text-gray-500">Slicing by - Indah Suci Ramadani</p>
-  <p class="text-sm text-gray-500">© 2025 AbsenQ. All rights reserved.</p>
-</footer>
+<?php include __DIR__."/../layout/footerByIndah.php" ?>
 
 <?php include __DIR__ . "/../layout/footer.php" ?>

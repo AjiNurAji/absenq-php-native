@@ -2,18 +2,10 @@
 <?php include __DIR__ . "/../layout/dashboard/top.php"; ?>
 
 <div class="container mx-auto px-4">
-  <div class="flex justify-between items-center mb-4">
-    <!-- filter by class -->
-    <select id="filter-class" class="px-4 py-2 rounded shadow border">
-      <option <?= $filter == "0" ? "selected" : "" ?> value="0">Semua</option>
-      <?php foreach ($classes as $class): ?>
-        <option <?= $filter == $class->id ? "selected" : "" ?> value="<?= $class->id ?>"><?= $class->class_name ?></option>
-      <?php endforeach; ?>
-    </select>
-
+  <div class="flex justify-end items-center mb-4">
     <!-- create button -->
-    <a href="/student/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      Tambah Mahasiswa
+    <a href="/class/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Tambah Kelas
     </a>
   </div>
   <div class="overflow-hidden bg-white p-4 rounded-lg shadow">
@@ -22,10 +14,7 @@
         <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-t border-default-medium">
           <tr>
             <th scope="col" class="px-6 py-3 font-medium">
-              NIM
-            </th>
-            <th scope="col" class="px-6 py-3 font-medium">
-              Nama
+              ID
             </th>
             <th scope="col" class="px-6 py-3 font-medium">
               Kelas
@@ -36,21 +25,18 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($students as $student): ?>
+          <?php foreach ($classes as $class): ?>
             <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
               <th class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                <?= htmlspecialchars($student->student_id) ?>
+                <?= htmlspecialchars($class->id) ?>
               </th>
-              <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                <?= htmlspecialchars($student->name) ?>
-              </td>
-              <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                <?= htmlspecialchars($student->class_name) ?>
-              </td>
+              <th class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                <?= htmlspecialchars($class->class_name) ?>
+              </th>
               <td class="px-6 py-4 font-medium text-heading whitespace-nowrap flex items-center gap-3">
-                <a href="/student/<?= $student->student_id ?>"
+                <a href="/class/<?= $class->id ?>"
                   class="font-medium text-blue-500 hover:underline inline-block">Edit</a>
-                <button type="button" id="button-delete" onclick="deleteStudent(<?= $student->student_id ?>)"
+                <button type="button" id="button-delete" onclick="deleteClass(<?= $class->id ?>)"
                   class="font-medium text-red-600 hover:underline w-fit inline-block disabled:opacity-60 bg-transparent border-none outline-none">Hapus</button>
               </td>
             </tr>
@@ -59,10 +45,9 @@
       </table>
     </div>
   </div>
-
-
-
 </div>
+
+<?php include __DIR__."/../layout/footerByAji.php" ?>
 <?php include __DIR__ . "/../layout/dashboard/bottom.php"; ?>
 <!-- Include jQuery (DataTables is a jQuery plugin) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -77,16 +62,8 @@
 
 </script>
 <script>
-  const filterClass = document.getElementById("filter-class");
-
-  filterClass.addEventListener("change", (e) => {
-    e.preventDefault();
-    window.location.href = "/students?class=" + e.target.value
-  });
-</script>
-<script>
-  async function deleteStudent(student_id) {
-    confirm("Yakin menghapus mahasiswa ini?")
+  async function deleteClass(class_id) {
+    confirm("Yakin menghapus kelas ini?")
 
     Toastify({
       text: "Mohon tunggu...",
@@ -95,12 +72,12 @@
     }).showToast();
 
     // execute
-    const response = await fetch("/student/delete", {
+    const response = await fetch("/class/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ student_id })
+      body: JSON.stringify({ id: class_id })
     });
 
     const result = await response.json();
