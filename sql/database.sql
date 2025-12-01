@@ -15,29 +15,41 @@ CREATE TABLE class (
 );
 
 CREATE TABLE students (
-    student_id VARCHAR(15) PRIMARY KEY UNIQUE,
+    student_id VARCHAR(15) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     password VARCHAR(255),
     class_id INT,
     FOREIGN KEY (class_id) REFERENCES class(id)
 );
 
+CREATE TABLE courses (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  course_name VARCHAR(100)
+);
+
 CREATE TABLE schedules (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    course VARCHAR(100),
-    class VARCHAR(20),
+    course_id INT,
+    class_id INT,
     date DATE,
     start_time TIME,
-    end_time TIME
+    end_time TIME,
+    FOREIGN KEY (course_id) REFERENCES courses(id),
+    FOREIGN KEY (class_id) REFERENCES class(id)
 );
 
 CREATE TABLE attendance (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    student_id VARCHAR,
+    student_id VARCHAR(20),
     schedule_id INT,
     type ENUM('in','out'),
     time DATETIME,
-    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (schedule_id) REFERENCES schedules(id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (schedule_id) REFERENCES schedules(id)
 );
 
+INSERT INTO users (username, role, password) VALUES (
+  "admin",
+  "admin",
+  "$2y$12$ZCf2N3nmu7q5mBNZKr0vruA2V/Pf2VaPF/njbAoLPyTLXneArsVvm"
+);

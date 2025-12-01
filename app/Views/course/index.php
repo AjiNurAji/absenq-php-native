@@ -4,8 +4,8 @@
 <div class="container mx-auto px-4">
   <div class="flex justify-end items-center mb-4">
     <!-- create button -->
-    <a href="/class/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      Tambah Kelas
+    <a href="/course/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Tambah Matkul
     </a>
   </div>
   <div class="overflow-hidden bg-white p-4 rounded-lg shadow">
@@ -17,7 +17,7 @@
               No
             </th>
             <th scope="col" class="px-6 py-3 font-medium">
-              Kelas
+              Matkul
             </th>
             <th scope="col" class="px-6 py-3 font-medium">
               Aksi
@@ -25,18 +25,17 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($classes as $i => $class): ?>
+          <?php foreach ($courses as $i => $course): ?>
             <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
               <th class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                 <?= htmlspecialchars($i + 1) ?>
               </th>
               <th class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                <?= htmlspecialchars($class->class_name) ?>
+                <?= htmlspecialchars($course->course_name) ?>
               </th>
               <td class="px-6 py-4 font-medium text-heading whitespace-nowrap flex items-center gap-3">
-                <a href="/class/<?= $class->id ?>"
-                  class="font-medium text-blue-500 hover:underline inline-block">Edit</a>
-                <button type="button" id="button-delete" onclick="deleteClass(<?= $class->id ?>)"
+                <a href="/course/<?= $course->id ?>" class="font-medium text-blue-500 hover:underline inline-block">Edit</a>
+                <button type="button" id="button-delete" onclick="deleteCourse(<?= $course->id ?>)"
                   class="font-medium text-red-600 hover:underline w-fit inline-block disabled:opacity-60 bg-transparent border-none outline-none">Hapus</button>
               </td>
             </tr>
@@ -47,7 +46,7 @@
   </div>
 </div>
 
-<?php include __DIR__."/../layout/footerByAji.php" ?>
+<?php include __DIR__ . "/../layout/footerByAji.php" ?>
 <?php include __DIR__ . "/../layout/dashboard/bottom.php"; ?>
 <!-- Include jQuery (DataTables is a jQuery plugin) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -62,8 +61,8 @@
 
 </script>
 <script>
-  async function deleteClass(class_id) {
-    confirm("Yakin menghapus kelas ini?")
+  async function deleteCourse(course_id) {
+    confirm("Yakin menghapus mata kuliah ini?")
 
     Toastify({
       text: "Mohon tunggu...",
@@ -72,12 +71,12 @@
     }).showToast();
 
     // execute
-    const response = await fetch("/class/delete", {
+    const response = await fetch("/course/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ id: class_id })
+      body: JSON.stringify({ id: course_id })
     });
 
     const result = await response.json();
