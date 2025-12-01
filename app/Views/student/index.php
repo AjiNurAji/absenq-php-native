@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" />
 <?php include __DIR__ . "/../layout/dashboard/top.php"; ?>
 
-<div class="container mx-auto px-4">
+<div class="container mx-auto">
   <div class="flex justify-between items-center mb-4">
     <!-- filter by class -->
     <select id="filter-class" class="px-4 py-2 rounded shadow border">

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" />
 <?php include __DIR__ . "/../layout/dashboard/top.php"; ?>
 
-<div class="container mx-auto px-4">
+<div class="container mx-auto">
   <div class="flex justify-end items-center mb-4">
     <!-- create button -->
     <a href="/course/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

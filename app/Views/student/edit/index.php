@@ -1,6 +1,6 @@
 <?php include __DIR__ . "/../../layout/dashboard/top.php"; ?>
 
-<div class="container mx-auto px-4">
+<div class="container mx-auto">
   <!-- cancel add -->
   <a href="/students" class="mb-4 text-white bg-red-600 px-4 py-1 w-fit block text-sm rounded-lg">Batal</a>
   <div class="overflow-hidden bg-white p-4 rounded-lg shadow">
