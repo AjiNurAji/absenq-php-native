@@ -40,7 +40,7 @@ class AuthMiddleware implements Middleware
   {
     $user = $_SESSION["user"] ?? null;
 
-    if ($user["role"] !== "admin") {
+    if ($user["role"] !== "admin" && $user["role"] !== "employee") {
       http_response_code(403);
       echo "403 Forbidden - You do not have permission to access this resource.";
       exit();

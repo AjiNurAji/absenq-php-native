@@ -63,7 +63,9 @@
 </script>
 <script>
   async function deleteClass(class_id) {
-    confirm("Yakin menghapus kelas ini?")
+    const con = confirm("Yakin menghapus kelas ini?")
+
+    if (!con) return;
 
     Toastify({
       text: "Mohon tunggu...",

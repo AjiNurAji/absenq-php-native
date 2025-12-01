@@ -59,10 +59,8 @@
       </table>
     </div>
   </div>
-
-
-
 </div>
+<?php include __DIR__ . "/../layout/footerByAji.php" ?>
 <?php include __DIR__ . "/../layout/dashboard/bottom.php"; ?>
 <!-- Include jQuery (DataTables is a jQuery plugin) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -86,7 +84,9 @@
 </script>
 <script>
   async function deleteStudent(student_id) {
-    confirm("Yakin menghapus mahasiswa ini?")
+    const con = confirm("Yakin menghapus mahasiswa ini?")
+
+    if (!con) return;
 
     Toastify({
       text: "Mohon tunggu...",

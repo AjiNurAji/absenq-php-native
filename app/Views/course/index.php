@@ -62,7 +62,9 @@
 </script>
 <script>
   async function deleteCourse(course_id) {
-    confirm("Yakin menghapus mata kuliah ini?")
+    const con = confirm("Yakin menghapus mata kuliah ini?")
+
+    if (!con) return;
 
     Toastify({
       text: "Mohon tunggu...",

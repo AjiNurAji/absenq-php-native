@@ -18,3 +18,4 @@ require __DIR__ . "/attendance.php";
 require __DIR__ . "/student.php";
 require __DIR__ . "/classes.php";
 require __DIR__ . "/course.php";
+require __DIR__ . "/schedule.php";
