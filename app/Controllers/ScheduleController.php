@@ -34,6 +34,97 @@ class ScheduleController extends Controller
     ]);
   }
 
+  public function store()
+  {
+    // check request method
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+      http_response_code(403);
+      exit("Method not allowed!");
+    }
+
+    // get data value
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    // check exsists
+    $check = Schedule::checkExists($data);
+    if ($check) {
+      http_response_code(400);
+      return self::json([
+        "status" => "error",
+        "message" => "Jadwal untuk matakuliah ini sudah ada.",
+      ]);
+    }
+
+    try {
+      Schedule::create($data);
+
+      return self::json([
+        "status" => "success",
+        "message" => "Berhasil menambahkan jadwal!"
+      ]);
+
+    } catch (\PDOException $e) {
+      http_response_code($e->getCode());
+      return self::json([
+        "status" => "error",
+        "message" => "Gagal menambahkan jadwal, silahkan coba lagi!"
+      ]);
+    }
+  }
+
+  // edit page
+  public function edit($id)
+  {
+    $classes = Classes::all();
+    $courses = Course::all();
+
+    return View::render("schedule/edit/index", [
+      "title" => "Edit Jadwal - AbsenQ",
+      "titleHeader" => "Edit Jadwal",
+      "schedule" => Schedule::getById($id),
+      "classes" => $classes,
+      "courses" => $courses,
+    ]);
+  }
+
+  public function update($id)
+  {
+    // check request method
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+      http_response_code(403);
+      exit("Method not allowed!");
+    }
+
+    // get data value
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    // check exsists
+    $check = Schedule::checkExists($data);
+    if ($check) {
+      http_response_code(400);
+      return self::json([
+        "status" => "error",
+        "message" => "Jadwal untuk matakuliah ini sudah ada.",
+      ]);
+    }
+
+    try {
+      Schedule::update($id, $data);
+
+      return self::json([
+        "status" => "success",
+        "message" => "Berhasil mengubah jadwal!"
+      ]);
+
+    } catch (\PDOException $e) {
+      http_response_code($e->getCode());
+      return self::json([
+        "status" => "error",
+        "message" => "Gagal mengubah jadwal, silahkan coba lagi!"
+      ]);
+    }
+  }
+
   public function delete()
   {
     // validate request is post

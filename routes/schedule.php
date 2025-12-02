@@ -16,7 +16,7 @@ Router::post("/schedule/create", [ScheduleController::class, "store"], [
   [AuthMiddleware::class, "admin"]
 ]);
 
-Router::post("/schedule/{id}", [ScheduleController::class, "edit"], [
+Router::get("/schedule/{id}", [ScheduleController::class, "edit"], [
   [AuthMiddleware::class, "admin"]
 ]);
 
@@ -25,5 +25,10 @@ Router::post("/schedule/update/{id}", [ScheduleController::class, "update"], [
 ]);
 
 Router::post("/schedule/delete", [ScheduleController::class, "delete"], [
+  [AuthMiddleware::class, "admin"]
+]);
+
+// scan
+Router::get("/schedule/{id}/scan", [ScheduleController::class, "scan"], [
   [AuthMiddleware::class, "admin"]
 ]);

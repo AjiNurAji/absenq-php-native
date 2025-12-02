@@ -23,6 +23,42 @@ class Schedule extends Model
     return $stmt->fetch(\PDO::FETCH_OBJ);
   }
 
+  public static function getById($id)
+  {
+    $sql = "SELECT * FROM schedules WHERE id = :id";
+    $stmt = self::db()->prepare($sql);
+    $stmt->execute(['id' => $id]);
+    return $stmt->fetch(\PDO::FETCH_OBJ);
+  }
+
+  public static function update(string $id, array $data)
+  {
+    $sql = "UPDATE schedules 
+            SET course_id = :course_id, 
+            class_id = :class_id, 
+            date = :date, 
+            start_time = :start_time, 
+            end_time = :end_time 
+            WHERE id = :id";
+    $stmt = self::db()->prepare($sql);
+    $stmt->execute(array_merge($data, ['id' => $id]));
+    return $stmt->getIterator();
+  }
+
+  public static function checkExists(array $data)
+  {
+    $sql = "SELECT * FROM schedules 
+            WHERE course_id = :course_id 
+            AND class_id = :class_id 
+            AND date = :date 
+            AND start_time = :start_time 
+            AND end_time = :end_time 
+            LIMIT 1";
+    $stmt = self::db()->prepare($sql);
+    $stmt->execute($data);
+    return $stmt->fetch(\PDO::FETCH_OBJ);
+  }
+
   public static function all()
   {
     // get all with course name, class name, count of student, count of present
@@ -31,7 +67,7 @@ class Schedule extends Model
               (SELECT COUNT(*)  FROM attendance a WHERE a.status = 'present') as present
               FROM schedules sc 
               JOIN class cls ON sc.class_id = cls.id 
-              JOIN courses co ON sc.course_id = co.id";
+              JOIN courses co ON sc.course_id = co.id ORDER BY date DESC";
 
     $stmt = self::db()->query($query);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);

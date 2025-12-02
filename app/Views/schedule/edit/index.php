@@ -6,26 +6,28 @@
   <div class="overflow-hidden bg-white p-4 rounded-lg shadow">
     <form id="schedule-form" class="text-left">
       <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Tanggal</label>
-      <input type="date" name="date" id="date"
+      <input type="date" name="date" id="date" value="<?= htmlspecialchars($schedule->date) ?>"
         class="w-full p-3 border border-gray-300 rounded-lg mb-4 placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         required />
 
       <label for="course_id" class="block text-sm font-medium text-gray-700 mb-1">Mata Kuliah</label>
-      <select name="course_id" id="course_id"
+      <select name="course_id" id="course_id" value="<?= htmlspecialchars($schedule->course_id) ?>"
         class="w-full p-3 border border-gray-300 rounded-lg mb-4 placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
         <option selected disabled>Pilih Mata Kuliah</option>
         <?php foreach ($courses as $i => $value): ?>
-          <option value="<?= htmlspecialchars($value->id) ?>" key="<?= $i ?>"><?= htmlspecialchars($value->course_name) ?>
+          <option <?= $schedule->course_id === $value->id ? "selected" : "" ?> value="<?= htmlspecialchars($value->id) ?>"
+            key="<?= $i ?>"><?= htmlspecialchars($value->course_name) ?>
           </option>
         <?php endforeach; ?>
       </select>
 
       <label for="class_id" class="block text-sm font-medium text-gray-700 mb-1">Mata Kuliah</label>
-      <select name="class_id" id="class_id"
+      <select name="class_id" id="class_id" value="<?= htmlspecialchars($schedule->class_id) ?>"
         class="w-full p-3 border border-gray-300 rounded-lg mb-4 placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
         <option selected disabled>Pilih Kelas</option>
         <?php foreach ($classes as $i => $value): ?>
-          <option value="<?= htmlspecialchars($value->id) ?>" key="<?= $i ?>"><?= htmlspecialchars($value->class_name) ?>
+          <option <?= $schedule->class_id === $value->id ? "selected" : "" ?> value="<?= htmlspecialchars($value->id) ?>"
+            key="<?= $i ?>"><?= htmlspecialchars($value->class_name) ?>
           </option>
         <?php endforeach; ?>
       </select>
@@ -33,13 +35,13 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div class="">
           <label for="start_time" class="block text-sm font-medium text-gray-700 mb-1">Mulai</label>
-          <input type="time" name="start_time" id="start_time"
+          <input type="time" name="start_time" id="start_time" value="<?= htmlspecialchars($schedule->start_time) ?>"
             class="w-full p-3 border border-gray-300 rounded-lg mb-4 placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             required />
         </div>
         <div class="">
           <label for="end_time" class="block text-sm font-medium text-gray-700 mb-1">Sampai</label>
-          <input type="time" name="end_time" id="end_time"
+          <input type="time" name="end_time" id="end_time" value="<?= htmlspecialchars($schedule->end_time) ?>"
             class="w-full p-3 border border-gray-300 rounded-lg mb-4 placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             required />
         </div>
@@ -48,7 +50,7 @@
       <div class="flex justify-end items-center">
         <button type="submit" id="add-button"
           class="w-fit bg-blue-600 text-white px-3 rounded-lg text-md py-2 font-semibold hover:bg-blue-700 transition duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
-          Tambah
+          Ubah
         </button>
       </div>
     </form>
@@ -71,7 +73,7 @@
     const formData = new FormData(addForm);
     const data = Object.fromEntries(formData);
 
-    const res = await fetch("/schedule/create", {
+    const res = await fetch("/schedule/update/<?= $schedule->id ?>", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -83,9 +85,7 @@
 
     if (res.ok) {
       button.disabled = false;
-      button.innerText = "Tambah";
-
-      addForm.reset();
+      button.innerText = "Ubah";
 
       Toastify({
         text: result.message,
@@ -94,7 +94,7 @@
       }).showToast();
     } else {
       button.disabled = false;
-      button.innerText = "Tambah";
+      button.innerText = "Ubah";
 
       Toastify({
         text: result.message,
