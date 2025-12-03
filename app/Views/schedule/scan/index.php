@@ -13,7 +13,6 @@
 </style>
 
 <?php include __DIR__ . "/../../layout/header.php"; ?>
-<?= time() ?>
 <div class="container mx-auto p-4">
   <a href="/schedules" class="mb-4 text-white bg-red-600 px-4 py-2 w-fit block text-base rounded-lg">Batal</a>
 
