@@ -10,8 +10,7 @@ class Attendance extends Model
   {
     $sql = "SELECT * FROM attendance 
             WHERE student_id = :id 
-            AND schedule_id = :schedule_id 
-            AND type = 'in'
+            AND schedule_id = :schedule_id
             ORDER BY time DESC LIMIT 1";
     $stmt = self::db()->prepare($sql);
 

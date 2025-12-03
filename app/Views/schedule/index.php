@@ -26,7 +26,8 @@
           <div class="my-3">
             <p class="text-gray-600">Tanggal: <?= $schedule->date ?></p>
             <p class="text-gray-600">Jam: <?= $schedule->start_time . " s/d " . $schedule->end_time ?></p>
-            <p class="text-gray-600">Hadir: <?= $schedule->present . "/" . $schedule->count_of_student ?></p>
+            <p class="text-gray-600">Absen Masuk: <?= $schedule->present_in . "/" . $schedule->count_of_student ?></p>
+            <p class="text-gray-600">Absen Pulang: <?= $schedule->present_out . "/" . $schedule->count_of_student ?></p>
           </div>
           <!-- footer -->
           <div class="flex items-center justify-center gap-3">

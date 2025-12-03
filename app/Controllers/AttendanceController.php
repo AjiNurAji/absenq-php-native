@@ -28,7 +28,6 @@ class AttendanceController extends Controller
       ]);
     }
 
-
     if (count($parts) !== 5 || $parts[0] !== "ABSENQ" || $parts[1] !== "STUDENT") {
       http_response_code(400);
       return self::json([
@@ -61,7 +60,7 @@ class AttendanceController extends Controller
     $data = [
       "student_id" => $parts[3],
       "schedule_id" => $json["schedule_id"],
-      "type" => $check ? "out" : "in",
+      "type" => $check->type === "in" ? "out" : "in",
       "status" => "present",
       "note" => "Hadir"
     ];

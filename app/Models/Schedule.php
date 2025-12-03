@@ -64,7 +64,8 @@ class Schedule extends Model
     // get all with course name, class name, count of student, count of present
     $query = "SELECT sc.*, cls.class_name, co.course_name, 
               (SELECT COUNT(*) FROM students s WHERE s.class_id = sc.class_id) as count_of_student,
-              (SELECT COUNT(*)  FROM attendance a WHERE a.status = 'present') as present
+              (SELECT COUNT(*)  FROM attendance a WHERE a.status = 'present' AND a.type = 'in' AND a.schedule_id = sc.id) as present_in,
+              (SELECT COUNT(*)  FROM attendance a WHERE a.status = 'present' AND a.type = 'out' AND a.schedule_id = sc.id) as present_out
               FROM schedules sc 
               JOIN class cls ON sc.class_id = cls.id 
               JOIN courses co ON sc.course_id = co.id ORDER BY date DESC";
@@ -77,7 +78,7 @@ class Schedule extends Model
   {
     $query = "SELECT sc.*, cls.class_name, co.course_name, 
               (SELECT COUNT(*) FROM students s WHERE s.class_id = sc.class_id) as count_of_student,
-              (SELECT COUNT(*)  FROM attendance a WHERE a.status = 'present') as present
+              (SELECT COUNT(*) FROM attendance a WHERE a.status = 'present') as present
               FROM schedules sc 
               JOIN class cls ON sc.class_id = cls.id 
               JOIN courses co ON sc.course_id = co.id WHERE sc.id = :id";
