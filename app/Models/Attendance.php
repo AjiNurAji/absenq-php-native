@@ -43,9 +43,10 @@ class Attendance extends Model
 
   public static function lastAttendance(string $student_id)
   {
-    $sql = "SELECT a.*,sc.*
+    $sql = "SELECT a.*,sc.*, c.*
             FROM attendance a
             JOIN schedules sc ON sc.id = a.schedule_id
+            JOIN courses c ON c.id = sc.course_id
             WHERE a.student_id = :id ORDER BY a.id DESC LIMIT 1";
 
     $stmt = self::db()->prepare($sql);

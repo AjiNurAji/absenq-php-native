@@ -34,10 +34,11 @@
           </p>
 
         <?php else: ?>
-          <p>Mata kuliah: Matematika diskrit</p>
+          <p>Mata kuliah: <?= htmlspecialchars($lastAttendance->course_name) ?></p>
           <p class="text-2xl font-semibold text-green-500">
-            Sudah Absen
+            Absen <?= htmlspecialchars($lastAttendance->type === "in" ? "Masuk" : "Pulang") ?>
           </p>
+          <p class="text-sm"><?= htmlspecialchars(date("H:m", strtotime($lastAttendance->time))) ?></p>
         <?php endif; ?>
       </div>
     </div>

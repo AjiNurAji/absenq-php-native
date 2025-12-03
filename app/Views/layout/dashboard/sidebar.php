@@ -32,7 +32,7 @@
   <!-- Logout -->
   <form action="/logout" id="logout-form" method="POST">
     <button type="submit" id="button-logout"
-      class="w-full bg-red-600 text-white py-2 rounded-lg text-lg font-semibold hover:bg-red-700 transition duration-200 shadow-md mt-6">
+      class="w-full bg-red-600 text-white py-2 mb-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition duration-200 shadow-md mt-6">
       <i class="fa-solid fa-right-from-bracket mr-2"></i>
       Logout
     </button>
@@ -65,6 +65,7 @@
       }).showToast();
 
       window.location.href = "/login";
+      localStorage.clear();
 
       buttonLogout.disabled = false;
       buttonLogout.innerText = "Logout";
