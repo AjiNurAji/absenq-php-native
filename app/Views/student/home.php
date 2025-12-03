@@ -86,7 +86,7 @@
   </div>
 </div>
 
-<?php include __DIR__ . "/../layout/footerByAji.php" ?>
+<?php include __DIR__ . "/../layout/footerByIndah.php" ?>
 
 <script>
   const timeDisplay = document.getElementById("timeDisplay");
