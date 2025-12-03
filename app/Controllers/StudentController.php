@@ -4,16 +4,10 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\View;
+use App\Helpers\QR;
+use App\Helpers\StrHelper;
 use App\Models\Classes;
 use App\Models\Student;
-
-use Endroid\QrCode\Builder\Builder;
-use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\Label\Font\OpenSans;
-use Endroid\QrCode\Label\LabelAlignment;
-use Endroid\QrCode\RoundBlockSizeMode;
-use Endroid\QrCode\Writer\PngWriter;
 
 class StudentController extends Controller
 {
@@ -154,28 +148,14 @@ class StudentController extends Controller
     }
   }
 
-  public static function list()
-  {
-    return self::json(Student::all());
-  }
-
-  public static function get($id)
-  {
-    return self::json(Student::get($id));
-  }
-
   public function qr()
   {
-    // pastikan sudah login student
-    if (!isset($_SESSION["user"])) {
-      self::redirect("/login");
-      return;
-    }
-
-    return View::render("student/qr");
+    return View::render("student/qr", [
+      "title" => "QR Mahasiswa - AbsenQ"
+    ]);
   }
 
-  public function qrImage(): never
+  public function qrImage()
   {
     // validate is method post
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -183,43 +163,32 @@ class StudentController extends Controller
       exit("Method not allowed");
     }
 
-    // get any value form client
-    $param = json_decode(file_get_contents("php://input"), true);
-
-    $studentId = $_SESSION["student_id"];
+    $student = $_SESSION["user"];
 
     // create random unique id
-    $randomId = uniqid("qr_id");
+    $randomId = StrHelper::uuid();
+    $lifetime = 4 * 60; // 4 minutes
+    $exp = time() + $lifetime;
 
-    // payload format for QR ABSENQ|STUDENT|ID_QR|ID_STUDENT|CLASS|COURSE|EXPIRED
-    $payload = "ABSENQ|STUDENT|$randomId|" . $studentId["student_id"] . "|" . $param["class"] . "|" . $param["course"] . "|" . $param["expired_in"];
+    // payload format for QR ABSENQ|STUDENT|ID_QR|ID_STUDENT|EXPIRED
+    $payload = "ABSENQ|STUDENT|".$randomId."|".$student["student_id"]."|".$exp;
 
-
-    if (!$studentId) {
+    if (!$student) {
       die("Invalid QR request");
     }
 
     // Build QR image
-    $result = new Builder(
-    writer: new PngWriter(),
-    writerOptions: [],
-    validateResult: false,
-    data: $payload,
-    encoding: new Encoding('UTF-8'),
-    errorCorrectionLevel: ErrorCorrectionLevel::High,
-    size: 300,
-    margin: 10,
-    roundBlockSizeMode: RoundBlockSizeMode::Margin,
-    // logoPath: __DIR__ . '/assets/bender.png',
-    // logoResizeToWidth: 50,
-    // logoPunchoutBackground: true,
-    labelText: "QR Absen: " . $studentId["name"],
-    labelFont: new OpenSans(20),
-    labelAlignment: LabelAlignment::Center
-    )->build();
+    $result = QR::generate($payload, $student["name"]);
+    $base64image = "data:" . $result->getMimeType() . ";base64," . base64_encode($result->getString());
 
-    header('Content-Type: ' . $result->getMimeType());
-    echo $result->getString();
-    exit;
+    return self::json([
+      "status" => "success",
+      "message" => "QR berhasil dibuat silahkan gunakan selama 4 menit.",
+      "qr_code" => [
+        "qr_image" => $base64image,
+        "exp" => $exp,
+        "remaining" => $lifetime
+      ],
+    ]);
   }
 }

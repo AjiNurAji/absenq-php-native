@@ -1,4 +1,4 @@
-<?
+<?php
 
 use App\Controllers\ScheduleController;
 use App\Core\Router;

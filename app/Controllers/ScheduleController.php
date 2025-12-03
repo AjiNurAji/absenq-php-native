@@ -150,4 +150,15 @@ class ScheduleController extends Controller
       ]);
     }
   }
+
+  public function scan($id)
+  {
+    $schedule = Schedule::getByIdWithJoin($id);
+
+    return View::render("schedule/scan/index", [
+      "title" => "Scan QR - AbsenQ",
+      "titleHeader" => "Scan QR",
+      "schedule" => $schedule
+    ]);
+  }
 }

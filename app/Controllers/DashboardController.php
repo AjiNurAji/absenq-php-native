@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\View;
+use App\Models\Attendance;
 use App\Models\Student;
 
 class DashboardController extends Controller
@@ -28,8 +29,21 @@ class DashboardController extends Controller
       ]);
     }
 
+    $user = Student::get($_SESSION["user"]["student_id"]);
+
+    // get new attendance or scheduler attendance
+   $lastAttendance = Attendance::lastAttendance($user->student_id);
+   $upcomingAttendance = Attendance::upcomingAttendance($user->class_id, $user->student_id);
+
+    // $attendance = Attendance::listBySchedule()
+
+    // var_dump($lastAttendance);
+    // var_dump($upcomingAttendance);
+
     return View::render("student/home", [
       "title" => "Dashboard - AbsenQ",
+      "lastAttendance" => $lastAttendance,
+      "upcomingAttendance" => $upcomingAttendance
     ]);
   }
 }

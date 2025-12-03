@@ -72,4 +72,18 @@ class Schedule extends Model
     $stmt = self::db()->query($query);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
+
+  public static function getByIdWithJoin($id)
+  {
+    $query = "SELECT sc.*, cls.class_name, co.course_name, 
+              (SELECT COUNT(*) FROM students s WHERE s.class_id = sc.class_id) as count_of_student,
+              (SELECT COUNT(*)  FROM attendance a WHERE a.status = 'present') as present
+              FROM schedules sc 
+              JOIN class cls ON sc.class_id = cls.id 
+              JOIN courses co ON sc.course_id = co.id WHERE sc.id = :id";
+
+    $stmt = self::db()->prepare($query);
+    $stmt->execute(["id" => $id]);
+    return $stmt->fetch(\PDO::FETCH_OBJ);
+  }
 }

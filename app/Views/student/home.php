@@ -4,7 +4,9 @@
   <div class="px-6 py-8">
     <div class="text-center space-y-2">
       <div class="flex items-center justify-center gap-2 mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock h-6 w-6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-clock-icon lucide-clock h-6 w-6">
           <path d="M12 6v6l4 2" />
           <circle cx="12" cy="12" r="10" />
         </svg>
@@ -22,14 +24,21 @@
 <div class="grid grid-template-columns-1 md:grid-cols-2 gap-6">
   <div class="rounded-lg border bg-white text-black shadow-sm">
     <div class="flex flex-col space-y-1.5 p-6">
-      <h3 class="text-2xl font-semibold leading-none tracking-tight" id="status title">Absen Sekarang</h3>
+      <h3 class="text-2xl font-semibold leading-none tracking-tight" id="status title">Absen Terakhir</h3>
     </div>
     <div class="p-6 pt-0">
       <div class="text-center py-4">
-        <p>Mata kuliah: Matematika diskrit</p>
-        <p class="text-2xl font-semibold text-green-500">
-          Sudah Absen
-        </p>
+        <?php if (!$lastAttendance): ?>
+          <p class="text-2xl font-semibold text-red-500">
+            Belum Absen
+          </p>
+
+        <?php else: ?>
+          <p>Mata kuliah: Matematika diskrit</p>
+          <p class="text-2xl font-semibold text-green-500">
+            Sudah Absen
+          </p>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -39,10 +48,17 @@
     </div>
     <div class="p-6 pt-0">
       <div class="text-center py-4">
-        <p class="text-2xl font-semibold text-green-500">
-        <p>Mata kuliah: Matematika diskrit</p>
-        Belum Absen
-        </p>
+        <?php if (!$upcomingAttendance): ?>
+          <p class="text-2xl font-semibold text-red-500">
+            Tidak ada jadwal
+          </p>
+
+        <?php else: ?>
+          <p>Mata kuliah: <?= htmlspecialchars($upcomingAttendance->course_name) ?></p>
+          <p>Tanggal/waktu:
+            <?= htmlspecialchars($upcomingAttendance->date . "/" . $upcomingAttendance->start_time . " s/d " . $upcomingAttendance->end_time) ?>
+          </p>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -53,28 +69,24 @@
     <!-- Qr Logo -->
     <div class="bg-blue-500/20 p-4 md:p-6 rounded-full mb-4">
       <div class="text-blue-600 text-xl md:text-2xl">
-        <?php include __DIR__."/../components/logo.php"; ?>
+        <i data-lucide="qr-code" class="size-8"></i>
       </div>
     </div>
     <div class="text-2xl font-semibold leading-none tracking-tight" id="status title">QR Code Absen</div>
   </div>
   <div class="p-6 pt-0">
     <div class="text-center py-4">
-      <p>Mata kuliah: Matematika diskrit</p>
       <p>QR Code hanya berlaku 4 menit!</p>
 
-      <!-- qr display -->
-      <div class=""></div>
-
-      <button
-        type="submit"
-        id="qr-generate"
-        class="w-fit bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+      <a href="/student/qr"
+        class="w-fit bg-blue-600 inline-block text-white px-3 py-1 mt-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
         Lihat QR Code
-      </button>
+        </a>
     </div>
   </div>
 </div>
+
+<?php include __DIR__ . "/../layout/footerByAji.php" ?>
 
 <script>
   const timeDisplay = document.getElementById("timeDisplay");
