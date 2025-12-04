@@ -22,7 +22,7 @@ CREATE TABLE students (
     password VARCHAR(255) NOT NULL,
     class_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY (class_id) REFERENCES class(id)
+    FOREIGN KEY (class_id) REFERENCES class(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE courses (
@@ -39,8 +39,8 @@ CREATE TABLE schedules (
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY (course_id) REFERENCES courses(id),
-    FOREIGN KEY (class_id) REFERENCES class(id)
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (class_id) REFERENCES class(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE attendance (
@@ -52,8 +52,8 @@ CREATE TABLE attendance (
     note VARCHAR(255),
     time DATETIME NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY (student_id) REFERENCES students(student_id),
-    FOREIGN KEY (schedule_id) REFERENCES schedules(id)
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (schedule_id) REFERENCES schedules(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO users (username, role, password) VALUES (
