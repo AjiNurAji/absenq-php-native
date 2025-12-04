@@ -1,6 +1,6 @@
 <?php include __DIR__ . "/../layout/header.php"; ?>
 <div class="container mx-auto p-4">
-  <a href="/dashboard" class="mb-4 text-white bg-red-600 px-4 py-2 w-fit block text-base rounded-lg">Batal</a>
+  <a href="/dashboard" class="mb-4 text-white bg-red-600 px-4 py-2 w-fit block text-base rounded-lg">Kembali</a>
   <div class="mx-auto rounded-lg border bg-white text-black shadow-sm w-full max-w-[400px]">
     <div class="flex flex-col space-y-1.5 p-6 justify-center items-center">
       <!-- Qr Logo -->
@@ -17,7 +17,7 @@
 
         <!-- qr display -->
         <div class="w-full hidden" id="qr-wrapper">
-          <p class="text-xs text-center mb-2">Kadaluarsa dalam: <span id="countdown"></span> </p>
+          <p class="text-xs text-center mb-2">Kedaluwarsa dalam: <span id="countdown"></span> </p>
           <div class="rounded-md max-w-[400px] mx-auto">
             <img src="" alt="QR Code" class="w-full h-auto object-cover" id="qr-image" />
           </div>

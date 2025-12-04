@@ -6,7 +6,7 @@
     </a>
   </div>
 
-  <div class="grid mt-3 <?= empty($schedules) ? 'grid-cols-1' : 'grid grid-cols-1 md:grid-cols-3 gap-4'?>">
+  <div class="grid mt-3 <?= empty($schedules) ? 'grid-cols-1' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'?>">
     <?php if (empty($schedules)): ?>
       <div class="bg-white shadow rounded-lg p-4">
         <p class="text-center">Belum ada jadwal.</p>
@@ -14,7 +14,7 @@
       <?php
     else:
       foreach ($schedules as $i => $schedule): ?>
-        <div class="bg-white shadow rounded-lg p-4">
+        <div class="bg-white shadow rounded-lg p-4 flex flex-col justify-between">
           <!-- Header -->
           <div class="flex justify-between items-center">
             <h2 class="font-medium text-gray-800"><?= $schedule->course_name ?></h2>
@@ -26,8 +26,7 @@
           <div class="my-3">
             <p class="text-gray-600">Tanggal: <?= $schedule->date ?></p>
             <p class="text-gray-600">Jam: <?= $schedule->start_time . " s/d " . $schedule->end_time ?></p>
-            <p class="text-gray-600">Absen Masuk: <?= $schedule->present_in . "/" . $schedule->count_of_student ?></p>
-            <p class="text-gray-600">Absen Pulang: <?= $schedule->present_out . "/" . $schedule->count_of_student ?></p>
+            <p class="text-gray-600">Jumlah Hadir: <?= $schedule->present . "/" . $schedule->count_of_student ?></p>
           </div>
           <!-- footer -->
           <div class="flex items-center justify-center gap-3">

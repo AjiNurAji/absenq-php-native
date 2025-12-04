@@ -75,7 +75,7 @@ class StudentController extends Controller
         "message" => "Berhasil menambahkan mahasiswa",
       ]);
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Terjadi kesalahan silahkan coba lagi!"

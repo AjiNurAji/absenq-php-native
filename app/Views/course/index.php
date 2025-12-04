@@ -27,12 +27,12 @@
         <tbody>
           <?php foreach ($courses as $i => $course): ?>
             <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
-              <th class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+              <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                 <?= htmlspecialchars($i + 1) ?>
-              </th>
-              <th class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+              </td>
+              <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                 <?= htmlspecialchars($course->course_name) ?>
-              </th>
+              </td>
               <td class="px-6 py-4 font-medium text-heading whitespace-nowrap flex items-center gap-3">
                 <a href="/course/<?= $course->id ?>" class="font-medium text-blue-500 hover:underline inline-block">Edit</a>
                 <button type="button" id="button-delete" onclick="deleteCourse(<?= $course->id ?>)"

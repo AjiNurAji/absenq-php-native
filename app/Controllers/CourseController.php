@@ -52,7 +52,7 @@ class CourseController extends Controller
         "message" => "Berhasil menambahkan mata kuliah!"
       ]);
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Gagal menambahkan mata kuliah!"
@@ -78,7 +78,7 @@ class CourseController extends Controller
         "message" => "Berhasil menghapus mata kuliah!"
       ]);
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Gagal menghapus mata kuliah!",
@@ -123,7 +123,7 @@ class CourseController extends Controller
         "message" => "Berhasil mengubah mata kuliah!"
       ]);
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Gagal mengubah mata kuliah!"

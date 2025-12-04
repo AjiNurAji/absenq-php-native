@@ -64,7 +64,7 @@ class ScheduleController extends Controller
       ]);
 
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Gagal menambahkan jadwal, silahkan coba lagi!"
@@ -117,7 +117,7 @@ class ScheduleController extends Controller
       ]);
 
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Gagal mengubah jadwal, silahkan coba lagi!"
@@ -143,7 +143,7 @@ class ScheduleController extends Controller
         "message" => "Berhasil menghapus jadwal!"
       ]);
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Gagal menghapus jadwal!",

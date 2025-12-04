@@ -14,7 +14,7 @@
 
 <?php include __DIR__ . "/../../layout/header.php"; ?>
 <div class="container mx-auto p-4">
-  <a href="/schedules" class="mb-4 text-white bg-red-600 px-4 py-2 w-fit block text-base rounded-lg">Batal</a>
+  <a href="/schedules" class="mb-4 text-white bg-red-600 px-4 py-2 w-fit block text-base rounded-lg">Kembali</a>
 
   <div class="flex flex-wrap items-start gap-4">
     <div class="bg-white shadow rounded p-4">

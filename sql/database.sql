@@ -47,11 +47,12 @@ CREATE TABLE attendance (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id VARCHAR(20) NOT NULL,
     schedule_id INT NOT NULL,
-    type ENUM('in','out') NOT NULL,
+    in_time TIMESTAMP DEFAULT NULL,
+    out_time TIMESTAMP DEFAULT NULL,
     status ENUM('present','absent') NOT NULL,
     note VARCHAR(255),
-    time DATETIME NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (schedule_id) REFERENCES schedules(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

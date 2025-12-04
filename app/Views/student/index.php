@@ -38,9 +38,9 @@
         <tbody>
           <?php foreach ($students as $student): ?>
             <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
-              <th class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+              <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                 <?= htmlspecialchars($student->student_id) ?>
-              </th>
+              </td>
               <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                 <?= htmlspecialchars($student->name) ?>
               </td>

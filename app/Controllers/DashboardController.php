@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\View;
 use App\Models\Attendance;
+use App\Models\Schedule;
 use App\Models\Student;
 
 class DashboardController extends Controller
@@ -19,31 +20,29 @@ class DashboardController extends Controller
     }
 
     if ($user['role'] === 'admin') {
-
-      // Get count of students
-      $count_of_student = Student::getCount();
+      // get present now
+      $presentToDay = Attendance::countOfPresent("present");
+      $absenToDay = Attendance::countOfPresent("absent");
+      $avgPerMonth = Attendance::getAvgPerMonth();
 
       return View::render("dashboard/index", [
         "title" => "Dashboard - AbsenQ",
-        "count_of_student" => $count_of_student,
+        "presentToDay" => $presentToDay,
+        "avgPerMonth" => $avgPerMonth,
+        "notScan" => $presentToDay->present_count - $absenToDay->present_count
       ]);
     }
 
     $user = Student::get($_SESSION["user"]["student_id"]);
 
     // get new attendance or scheduler attendance
-   $lastAttendance = Attendance::lastAttendance($user->student_id);
-   $upcomingAttendance = Attendance::upcomingAttendance($user->class_id, $user->student_id);
-
-    // $attendance = Attendance::listBySchedule()
-
-    // var_dump($lastAttendance);
-    // var_dump($upcomingAttendance);
+    $lastAttendance = Attendance::lastAttendance($user->student_id);
+    $upcomingAttendance = Attendance::upcomingAttendance($user->class_id, $user->student_id);
 
     return View::render("student/home", [
       "title" => "Dashboard - AbsenQ",
       "lastAttendance" => $lastAttendance,
-      "upcomingAttendance" => $upcomingAttendance
+      "upcomingAttendance" => $upcomingAttendance,
     ]);
   }
 }

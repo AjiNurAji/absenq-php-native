@@ -1,5 +1,4 @@
 <?php include __DIR__ . "/../layout/dashboard/top.php" ?>
-
 <div class="rounded-lg border shadow-sm mb-6 bg-gradient-to-r from-blue-500 to-blue-500/80 border-0 text-white">
   <div class="px-6 py-8">
     <div class="text-center space-y-2">
@@ -36,9 +35,9 @@
         <?php else: ?>
           <p>Mata kuliah: <?= htmlspecialchars($lastAttendance->course_name) ?></p>
           <p class="text-2xl font-semibold text-green-500">
-            Absen <?= htmlspecialchars($lastAttendance->type === "in" ? "Masuk" : "Pulang") ?>
+            Absen <?= htmlspecialchars(!$lastAttendance->out_time ? "Masuk" : "Pulang") ?>
           </p>
-          <p class="text-sm"><?= htmlspecialchars(date("H:m", strtotime($lastAttendance->time))) ?></p>
+          <p class="text-sm"><?= toIDTime($lastAttendance->updated_at) ?></p>
         <?php endif; ?>
       </div>
     </div>

@@ -52,7 +52,7 @@ class ClassesController extends Controller
         "message" => "Berhasil menambahkan kelas baru!",
       ]);
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Gagal menambahkan kelas baru, silahkan coba lagi!",
@@ -78,7 +78,7 @@ class ClassesController extends Controller
         "message" => "Berhasil menghapus kelas!",
       ]);
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Gagal menghapus kelas, silahkan coba lagi!",
@@ -121,7 +121,7 @@ class ClassesController extends Controller
         "message" => "Berhasil mengubah kelas!",
       ]);
     } catch (\PDOException $e) {
-      http_response_code($e->getCode());
+      http_response_code(500);
       return self::json([
         "status" => "error",
         "message" => "Gagal mengubah kelas, silahkan coba lagi!",

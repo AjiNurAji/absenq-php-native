@@ -86,11 +86,4 @@ class Student extends Model
     $stmt = self::db()->query($sql);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
-
-  public static function getCount()
-  {
-    $stmt = self::db()->query("SELECT COUNT(*) as count FROM students");
-    $result = $stmt->fetch(\PDO::FETCH_OBJ);
-    return $result->count;
-  }
 }

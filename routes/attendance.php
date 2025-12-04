@@ -12,9 +12,26 @@ Router::get("/student/qr", [StudentController::class, "qr"], [
   [AuthMiddleware::class, "student"]
 ]);
 
+Router::get("/attendances", [AttendanceController::class, "index"], [
+  [AuthMiddleware::class, "admin"]
+]);
+
+Router::get("/student/attendance", [AttendanceController::class, "hisotyStudent"], [
+  [AuthMiddleware::class, "student"]
+]);
+
+Router::get("/attendance/chart/weekly", [AttendanceController::class, "chartWeekly"], [
+  [AuthMiddleware::class, "admin"]
+]);
+
+Router::get("/attendance/chart/monthly", [AttendanceController::class, "chartMonthly"], [
+  [AuthMiddleware::class, "admin"]
+]);
+
 Router::get("/scan", [AttendanceController::class, "scanPage"], [
   [AuthMiddleware::class, "admin"]
 ]);
+
 Router::post(
   "/scan/submit",
   [AttendanceController::class, "scanSubmit"],
