@@ -4,10 +4,11 @@
       <i data-lucide="qr-code"></i>
     </div>
     <h1 class="text-xl font-bold text-gray-800 capitalize">
-      <?= $titleHeader ?? ($auth["role"] === "admin" ? "Dashboard " . $auth["role"] : "Dashboard Mahasiswa") ?></h1>
+      <?= $titleHeader ?? ($auth["role"] === "admin" ? "Dashboard " . $auth["role"] : "Dashboard Mahasiswa") ?>
+    </h1>
   </div>
   <div class="flex items-center gap-3">
-    <p>Halo, <?= $auth["name"] ?></p>
+    <?php include __DIR__ . "/userDropdown.php" ?>
     <button id="hamburger-menu"
       class="flex md:hidden items-center gap-2 border border-gray-300 px-4 py-2 rounded-md text-gray-600 hover:bg-gray-50 text-sm font-medium transition">
       <i class="fa-solid fa-bars"></i>
