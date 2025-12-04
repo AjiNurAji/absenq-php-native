@@ -104,13 +104,17 @@
         duration: 3000,
         backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
       }).showToast();
-        setTimeout(() => isLocked = false, 1000)
+      setTimeout(() => isLocked = false, 1000)
     }
   }
 
   let html5QrcodeScanner = new Html5QrcodeScanner(
     "reader",
-    { fps: 10, qrbox: 250 }
+    {
+      fps: 10, qrbox: 250, videoConstraints: {
+        facingMode: { exact: "environment" },
+      },
+    }
   );
 
   html5QrcodeScanner.render(onScanSuccess);
