@@ -2,14 +2,42 @@ version: "3.9"
 
 services:
  app:
+  image: php:8.4-apache
   build:
    context: .
    dockerfile: Dockerfile
   container_name: absenq
-  image: php:8.4-apache
   ports:
    - "8000:80"
   volumes:
    - .:/var/www/html
    - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+  depends_on:
+   - mysql
   restart: always
+
+ mysql:
+  image: mysql:latest
+  ports:
+   - "3306:3306"
+  volumes:
+   - mysql_data:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: admin123
+   MYSQL_DATABASE: testdb
+   MYSQL_USER: admin
+   MYSQL_PASSWORD: admin
+  container_name: mysql-absenq
+
+ phpmyadmin:
+  image: phpmyadmin:latest
+  ports:
+   - "8081:80"
+  depends_on:
+   - mysql
+  environment:
+   PMA_HOST: mysql-absenq
+  container_name: phpmyadmin-absenq
+
+volumes:
+ mysql_data:

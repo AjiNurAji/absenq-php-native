@@ -6,12 +6,14 @@ CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     role ENUM('admin','employee') NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE class (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    class_name VARCHAR(50) NOT NULL
+    class_name VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE students (
@@ -19,12 +21,14 @@ CREATE TABLE students (
     name VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
     class_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (class_id) REFERENCES class(id)
 );
 
 CREATE TABLE courses (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  course_name VARCHAR(100) NOT NULL
+  course_name VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE schedules (
@@ -34,7 +38,8 @@ CREATE TABLE schedules (
     date DATE NOT NULL,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
-    FOREIGN KEY (course_id) REFERENCES courses(id)
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (course_id) REFERENCES courses(id),
     FOREIGN KEY (class_id) REFERENCES class(id)
 );
 
@@ -46,6 +51,7 @@ CREATE TABLE attendance (
     status ENUM('present','absent') NOT NULL,
     note VARCHAR(255),
     time DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (student_id) REFERENCES students(student_id),
     FOREIGN KEY (schedule_id) REFERENCES schedules(id)
 );
