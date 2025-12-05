@@ -2,7 +2,7 @@
 <?php include __DIR__ . "/../../layout/dashboard/top.php"; ?>
 
 <div class="container mx-auto">
-  <div class="bg-white p-4 rounded-lg shadow">
+  <div class="bg-white overflow-hidden w-full p-4 rounded-lg shadow">
     <div class="overflow-auto">
       <div class="overflow-x-auto relative w-full">
         <table class="w-full text-sm text-left rtl:text-right text-body" id="myTable">
