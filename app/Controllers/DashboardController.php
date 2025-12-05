@@ -29,7 +29,7 @@ class DashboardController extends Controller
         "title" => "Dashboard - AbsenQ",
         "presentToDay" => $presentToDay,
         "avgPerMonth" => $avgPerMonth,
-        "notScan" => ($presentToDay->present_count + $absenToDay->present_count) - $presentToDay->total_students
+        "notScan" => ($presentToDay->present_count + $absenToDay->present_count) ?? ($presentToDay->present_count + $absenToDay->present_count) - $presentToDay->total_students
       ]);
     }
 
