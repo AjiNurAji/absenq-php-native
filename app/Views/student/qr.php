@@ -30,6 +30,10 @@
             <div class="rounded-md max-w-[400px] mx-auto">
               <img src="" alt="QR Code" class="w-full h-auto object-cover" id="qr-image" />
             </div>
+            <button type="button" id="qr-checking"
+              class="mt-3 w-fit bg-green-600 text-white px-3 py-1 mt-2 rounded-lg text-sm font-semibold hover:bg-green-700 transition duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+              Cek Status
+            </button>
           </div>
 
           <button type="submit" id="qr-generate"
@@ -115,7 +119,6 @@
       const secs = diff % 60;
 
       countdownEl.innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
-      checkAttendance();
     }, 1000);
   }
 </script>
@@ -133,9 +136,8 @@
       body: JSON.stringify({ schedule_id: <?= $upcomingAttendance->id ?> })
     }).then(res => res.json()).then(res => {
       if (!res.checking) return lokced = false;
-      if (res.checking.in_time && !res.checking.out_time) return lokced = false;
 
-      if (res.checking.in_time) {
+      if (!res.checking.in_time) {
         Toastify({
           text: res.message + " pulang",
           duration: 3000,
@@ -155,6 +157,8 @@
       }
     });
   }
+  const buttonGetStatus = document.getElementById("qr-checking");
+  buttonGetStatus.addEventListener("click", checkAttendance);
 </script>
 <script>
   // check localstorage
