@@ -102,6 +102,7 @@
     const interval = setInterval(() => {
       if (count <= 0) {
         clearInterval(interval);
+        localStorage.clear();
         window.location.href = "/dashboard";
         return;
       };
