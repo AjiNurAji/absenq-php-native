@@ -25,7 +25,7 @@ class Model
 
       try {
         self::$db = new PDO($dsn, $username, $password, $opts);
-        self::$db->exec("SET time_zone = 'Asia/Jakarta'");
+        self::$db->exec("SET time_zone = '+07:00'");
       } catch (\PDOException $e) {
         http_response_code(500);
         die("Database connection failed: " . $e->getMessage());
