@@ -209,7 +209,7 @@ class Attendance extends Model
 
   public static function checkAttendance(string $schedule_id, string $student_id)
   {
-    $sql = "SELECT 1 FROM attendance a 
+    $sql = "SELECT * FROM attendance a 
             WHERE a.schedule_id = :schedule_id
               AND a.student_id = :student_id";
 
