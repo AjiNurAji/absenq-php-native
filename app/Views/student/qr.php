@@ -134,9 +134,9 @@
     }).then(res => res.json()).then(res => {
       if (!res.checking) return lokced = false;
 
-      if (res.checking.out_time) {
+      if (res.checking.in_time) {
         Toastify({
-          text: result.message + " pulang",
+          text: res.message + " pulang",
           duration: 3000,
           backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
         }).showToast();
@@ -146,7 +146,7 @@
       }
 
       Toastify({
-        text: result.message + " masuk",
+        text: res.message + " masuk",
         duration: 3000,
         backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
       }).showToast();
