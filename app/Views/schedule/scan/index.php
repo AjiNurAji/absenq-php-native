@@ -12,7 +12,7 @@
   }
 
   #reader video {
-    width: 100%;
+    width: 100% !important;
   }
 </style>
 
@@ -31,7 +31,7 @@
     <div class="flex flex-wrap items-start gap-4">
       <div class="bg-white shadow rounded p-4">
         <h2 class="text-xl font-medium mb-4">Scan QR</h2>
-        <div class="w-full md:w-[400px] h-auto max-h-[500px] rounded-xl overflow-hidden">
+        <div class="w-full max-w-full md:w-[400px] h-auto max-h-[500px] rounded-xl overflow-hidden">
           <div id="reader" class="w-full h-full"></div>
         </div>
       </div>
