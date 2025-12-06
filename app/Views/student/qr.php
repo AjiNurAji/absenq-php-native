@@ -130,7 +130,7 @@
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ schedule_id: <?= $upcomingAttendance->id ?> });
+      body: JSON.stringify({ schedule_id: <?= $upcomingAttendance->id ?> })
     }).then(res => res.json()).then(res => {
       if (!res.checking) return lokced = false;
 
