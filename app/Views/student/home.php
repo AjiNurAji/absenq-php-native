@@ -43,7 +43,7 @@
               Absen <?= htmlspecialchars(!$lastAttendance->out_time ? "Masuk" : "Pulang") ?>
             </p>
           <?php endif; ?>
-          <p class="text-sm"><?= toIDTime($lastAttendance->updated_at) ?></p>
+          <p class="text-sm"><?= $lastAttendance->updated_at ?></p>
         <?php endif; ?>
       </div>
     </div>
