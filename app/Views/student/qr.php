@@ -133,7 +133,7 @@
       body: JSON.stringify({ schedule_id: <?= $upcomingAttendance->id ?> })
     }).then(res => res.json()).then(res => {
       if (!res.checking) return lokced = false;
-      if (res.checking.in_time && !res.checking.out_time) return;
+      if (res.checking.in_time && !res.checking.out_time) return lokced = false;
 
       if (res.checking.in_time) {
         Toastify({
@@ -145,8 +145,6 @@
         lokced = false;
         return;
       } else {
-        if (res.checking.in_time) return;
-
         Toastify({
           text: res.message + " masuk",
           duration: 3000,
