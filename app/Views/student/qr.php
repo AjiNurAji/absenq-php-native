@@ -113,7 +113,7 @@
 
       const mins = Math.floor(diff / 60);
       const secs = diff % 60;
-      
+
       countdownEl.innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
       checkAttendance();
     }, 1000);
@@ -125,13 +125,12 @@
     if (locked) return;
     lokced = true;
 
-
     await fetch("/attendance/checking", {
       method: "POST",
       headers: {
-        "Content-Type" : "application/json"
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({schedule_id: <?= $upcomingAttendance->id ?>});
+      body: JSON.stringify({ schedule_id: <?= $upcomingAttendance->id ?> });
     }).then(res => res.json()).then(res => {
       if (!res.checking) return lokced = false;
 

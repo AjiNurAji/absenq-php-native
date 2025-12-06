@@ -10,6 +10,10 @@
   button:hover {
     background-color: oklch(46.6% 0.245 262.881) !important;
   }
+
+  #reader video {
+    width: 100%;
+  }
 </style>
 
 <?php include __DIR__ . "/../../layout/header.php"; ?>
