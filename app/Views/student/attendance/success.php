@@ -36,7 +36,7 @@
                 <div>
                   <p class="text-sm text-gray-500">Waktu</p>
                   <p class="text-xl font-bold text-foreground">
-                    <?= htmlspecialchars(date("H:m", strtotime(toIDTime(!$lastAttendance->out_time ? $lastAttendance->in_time : $lastAttendance->out_time)))) ?>
+                    <?= htmlspecialchars(date("H:m", !$lastAttendance->out_time ? $lastAttendance->in_time : $lastAttendance->out_time)) ?>
                   </p>
                 </div>
               </div>
@@ -47,7 +47,7 @@
                 <div>
                   <p class="text-sm text-gray-500">Tanggal</p>
                   <p class="text-base font-medium text-foreground">
-                    <?= htmlspecialchars(date("l, d-m-Y", strtotime(toIDTime(!$lastAttendance->out_time ? $lastAttendance->in_time : $lastAttendance->out_time)))) ?>
+                    <?= htmlspecialchars(date("l, d-m-Y", !$lastAttendance->out_time ? $lastAttendance->in_time : $lastAttendance->out_time)) ?>
                   </p>
                 </div>
               </div>

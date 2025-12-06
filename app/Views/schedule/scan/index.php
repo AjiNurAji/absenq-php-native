@@ -132,21 +132,21 @@
   // );
 
   // html5QrcodeScanner.render(onScanSuccess);
-    Html5Qrcode.getCameras().then(devices => {
-      if (devices && devices.length) {
-        let backCamera = devices.find(d => d.label.toLowerCase().includes("back"));
-        let cameraId = backCamera ? backCamera.id : devices[0].id;
+  Html5Qrcode.getCameras().then(devices => {
+    if (devices && devices.length) {
+      let backCamera = devices.find(d => d.label.toLowerCase().includes("back"));
+      let cameraId = backCamera ? backCamera.id : devices[0].id;
 
-        const html5QrCode = new Html5Qrcode("reader");
+      const html5QrCode = new Html5Qrcode("reader");
 
-        html5QrCode.start(
-          cameraId,
-          {
-            fps: 10,
-            qrbox: 250
-          },
-          onScanSuccess
-        )
-      }
-    })
+      html5QrCode.start(
+        cameraId,
+        {
+          fps: 10,
+          qrbox: 250
+        },
+        onScanSuccess
+      )
+    }
+  })
 </script>

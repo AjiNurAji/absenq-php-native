@@ -49,10 +49,10 @@
                 <?= htmlspecialchars($value->course_name) ?>
               </td>
               <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                <?= htmlspecialchars(toIDTime($value->in_time)) ?>
+                <?= htmlspecialchars(($value->in_time)) ?>
               </td>
               <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                <?= htmlspecialchars($value->out_time ?  toIDTime($value->out_time) : "") ?>
+                <?= htmlspecialchars($value->out_time ?  $value->out_time : "") ?>
               </td>
               <td class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                 <?= htmlspecialchars($value->status === "present" ? "Hadir" : "Tidak Hadir") ?>
