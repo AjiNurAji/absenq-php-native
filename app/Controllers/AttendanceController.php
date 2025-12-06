@@ -202,4 +202,61 @@ class AttendanceController extends Controller
       "values" => $monthValues
     ]);
   }
+
+  public function absent(string $schedule_id)
+  {
+    return View::render("student/absent/index", [
+      "title" => "Pengajuan Izin Kehadiran - AbsenQ",
+      "titleHeader" => "Pengajuan Izin Kehadiran",
+      "schedule_id" => $schedule_id
+    ]);
+  }
+
+  public function absentPost()
+  {
+    // validate req method
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+      http_response_code(400);
+      return self::json([
+        "status" => "error",
+        "message" => "Invalid request method"
+      ]);
+    }
+
+    $student = $_SESSION["user"];
+    $json = json_decode(file_get_contents("php://input"), true);
+
+    try {
+      Attendance::logAbsent([
+        "student_id" => $student["student_id"],
+        "schedule_id" => $json["schedule_id"],
+        "status" => "absent",
+        "note" => $json["note"]
+      ]);
+
+      return self::json([
+        "status" => "success",
+        "message" => "Berhasil mengajukan izin."
+      ]);
+    } catch (\PDOException $e) {
+      http_response_code(500);
+      return self::json([
+        "status" => "error",
+        "message" => "Ada kesalahan silahkan coba lagi",
+        "errMesage" => $e->getMessage()
+      ]);
+    }
+  }
+
+  public function successAttendance()
+  {
+    $student = $_SESSION["user"];
+
+    $lastAttendance = Attendance::lastAttendance($student["student_id"]);
+
+    return View::render("student/attendance/success", [
+      "title" => "Absen Berhasil - AbsenQ",
+      "lastAttendance" => $lastAttendance
+    ]);
+  }
 }

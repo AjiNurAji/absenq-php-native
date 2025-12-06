@@ -1,3 +1,5 @@
+SET time_zone = "+07:00";
+
 CREATE DATABASE IF NOT EXISTS absenq;
 
 USE absenq;

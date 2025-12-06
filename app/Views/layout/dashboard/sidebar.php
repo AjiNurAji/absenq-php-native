@@ -1,7 +1,7 @@
 <!-- SIDEBAR -->
-<div id="backdrop" class="hidden md:hidden fixed w-full top-0 left-0 h-screen bg-zinc-800/25 backdrop-blur z-888"></div>
+<div id="backdrop" class="hidden lg:hidden fixed w-full top-0 left-0 h-screen bg-zinc-800/25 backdrop-blur z-888"></div>
 <aside id="sidebar"
-  class="w-64 bg-white h-screen shadow-md fixed left-[-100%] justify z-999 md:!left-0 top-0 p-6 flex flex-col transition-all duration-300 ease-in-out">
+  class="w-64 bg-white h-screen shadow-md fixed left-[-100%] justify z-999 lg:!left-0 top-0 p-6 flex flex-col transition-all duration-300 ease-in-out">
 
   <h2 class="text-xl font-bold text-gray-800 mb-8">
     <i class="fa-solid fa-layer-group text-blue-600 mr-2"></i>
@@ -30,7 +30,7 @@
   </nav>
 
   <button id="close-sidebar"
-    class="bg-blue-600 text-white p-2 rounded-full rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-200 shadow-md absolute top-4 -right-4 md:hidden">
+    class="bg-blue-600 text-white p-2 rounded-full rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-200 shadow-md absolute top-4 -right-4 lg:hidden">
     <i class="fa-solid fa-close"></i>
   </button>
 </aside>

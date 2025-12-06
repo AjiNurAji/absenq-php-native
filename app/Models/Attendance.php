@@ -140,6 +140,13 @@ class Attendance extends Model
     return $stmt->execute($data);
   }
 
+  public static function logAbsent(array $data)
+  {
+    $sql = "INSERT INTO attendance (student_id, schedule_id, in_time, out_time, status, note) VALUES (:student_id, :schedule_id, NOW(), NOW(), :status, :note)";
+    $stmt = self::db()->prepare($sql);
+    return $stmt->execute($data);
+  }
+
   public static function logOut(array $data)
   {
     $sql = "UPDATE attendance 
@@ -178,7 +185,10 @@ class Attendance extends Model
 
   public static function upcomingAttendance($class_id, string $student_id)
   {
-    $sql = "SELECT s.*, c.*
+    $sql = "SELECT s.*, c.course_name, 
+            (SELECT 1 FROM attendance a 
+                  WHERE a.schedule_id = s.id
+                    AND a.student_id = :student_id) as attendance_student
             FROM schedules s
             JOIN courses c ON c.id = s.course_id
             WHERE s.class_id = :class_id
@@ -194,6 +204,17 @@ class Attendance extends Model
 
     $stmt = self::db()->prepare($sql);
     $stmt->execute(['class_id' => $class_id, "student_id" => $student_id]);
+    return $stmt->fetch(\PDO::FETCH_OBJ);
+  }
+
+  public static function checkAttendance(string $schedule_id, string $student_id)
+  {
+    $sql = "SELECT 1 FROM attendance a 
+            WHERE a.schedule_id = :schedule_id
+              AND a.student_id = :student_id";
+
+    $stmt = self::db()->prepare($sql);
+    $stmt->execute(['schedule_id' => $schedule_id, "student_id" => $student_id]);
     return $stmt->fetch(\PDO::FETCH_OBJ);
   }
 }

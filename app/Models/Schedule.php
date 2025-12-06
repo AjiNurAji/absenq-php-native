@@ -67,7 +67,7 @@ class Schedule extends Model
               (SELECT COUNT(*)  FROM attendance a WHERE a.status = 'present' AND a.schedule_id = sc.id) as present
               FROM schedules sc 
               JOIN class cls ON sc.class_id = cls.id 
-              JOIN courses co ON sc.course_id = co.id ORDER BY date DESC";
+              JOIN courses co ON sc.course_id = co.id ORDER BY sc.created_at DESC";
 
     $stmt = self::db()->query($query);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);

@@ -27,18 +27,9 @@ require __DIR__ . "/../lib/getAuth.php";
       padding: 24px;
     }
 
-    /* Custom scrollbar jika diperlukan */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 4px;
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #e5e7eb transparent !important;
     }
   </style>
   <!-- lenis -->
@@ -50,7 +41,7 @@ require __DIR__ . "/../lib/getAuth.php";
   <!-- toastify -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <!-- custom css -->
-  <link rel="stylesheet" href="<?= getenv("APP_URL")."/assets/css/style.css" ?>">
+  <link rel="stylesheet" href="<?= getenv("APP_URL") . "/assets/css/style.css" ?>">
 </head>
 
 <body class="antialiased">

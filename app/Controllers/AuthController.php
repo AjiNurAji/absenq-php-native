@@ -58,6 +58,7 @@ class AuthController extends Controller
       $_SESSION["user"] = [
         "name" => $student->name,
         "student_id" => $student->student_id,
+        "class_id" => $student->class_id,
         "role" => "student"
       ];
 

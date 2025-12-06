@@ -1,13 +1,13 @@
 .z-999 {
-  z-index: 999;
+	z-index: 999;
 }
 
 .z-888 {
-  z-index: 888;
+	z-index: 888;
 }
 
 #html5-qrcode-button-camera-start {
-  background-color: oklch(54.6% 0.245 262.881);
-  padding: 5px 10px;
-  border-radius: 15px;
+	background-color: oklch(54.6% 0.245 262.881);
+	padding: 5px 10px;
+	border-radius: 15px;
 }

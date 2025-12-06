@@ -6,6 +6,7 @@ use App\Core\Controller;
 use App\Core\View;
 use App\Helpers\QR;
 use App\Helpers\StrHelper;
+use App\Models\Attendance;
 use App\Models\Classes;
 use App\Models\Student;
 
@@ -148,10 +149,48 @@ class StudentController extends Controller
     }
   }
 
+  public function checkAttendance()
+  {
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+      http_response_code(405);
+      exit("Method not allowed");
+    }
+
+    $data = json_decode(file_get_contents("php://input"), true);
+    $student = $_SESSION["user"];
+
+    try {
+      $checking = Attendance::checkAttendance($data["schedule_id"], $student["student_id"]);
+
+
+      return self::json([
+        "status" => "success",
+        "message" => "Berhasil melakukan absensi",
+        "checking" => $checking
+      ]);
+    } catch (\PDOException $e) {
+      http_response_code(500);
+      return self::json([
+        "status" => "error",
+        "message" => "Terjadi kesalahan silahkan coba lagi."
+      ]);
+    }
+  }
+
   public function qr()
   {
+    // student
+    $student = $_SESSION["user"];
+
+    $upcomingAttendance = Attendance::upcomingAttendance($student["class_id"], $student["student_id"]);
+
+    if (!$upcomingAttendance) {
+      self::redirect("/dashboard");
+    }
+
     return View::render("student/qr", [
-      "title" => "QR Mahasiswa - AbsenQ"
+      "title" => "QR Mahasiswa - AbsenQ",
+      "upcomingAttendance" => $upcomingAttendance
     ]);
   }
 
@@ -171,7 +210,7 @@ class StudentController extends Controller
     $exp = time() + $lifetime;
 
     // payload format for QR ABSENQ|STUDENT|ID_QR|ID_STUDENT|EXPIRED
-    $payload = "ABSENQ|STUDENT|".$randomId."|".$student["student_id"]."|".$exp;
+    $payload = "ABSENQ|STUDENT|" . $randomId . "|" . $student["student_id"] . "|" . $exp;
 
     if (!$student) {
       die("Invalid QR request");

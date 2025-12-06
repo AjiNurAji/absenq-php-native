@@ -34,9 +34,15 @@
 
         <?php else: ?>
           <p>Mata kuliah: <?= htmlspecialchars($lastAttendance->course_name) ?></p>
-          <p class="text-2xl font-semibold text-green-500">
-            Absen <?= htmlspecialchars(!$lastAttendance->out_time ? "Masuk" : "Pulang") ?>
-          </p>
+          <?php if ($lastAttendance->status === "absent"): ?>
+            <p class="text-2xl font-semibold text-yellow-500">
+              Izin Tidak Hadir
+            </p>
+          <?php else: ?>
+            <p class="text-2xl font-semibold text-green-500">
+              Absen <?= htmlspecialchars(!$lastAttendance->out_time ? "Masuk" : "Pulang") ?>
+            </p>
+          <?php endif; ?>
           <p class="text-sm"><?= toIDTime($lastAttendance->updated_at) ?></p>
         <?php endif; ?>
       </div>
@@ -54,10 +60,17 @@
           </p>
 
         <?php else: ?>
+          <p>Absen <?= htmlspecialchars($upcomingAttendance->attendance_student ? "Pulang" : "Masuk") ?></p>
           <p>Mata kuliah: <?= htmlspecialchars($upcomingAttendance->course_name) ?></p>
           <p>Tanggal/waktu:
             <?= htmlspecialchars($upcomingAttendance->date . "/" . $upcomingAttendance->start_time . " s/d " . $upcomingAttendance->end_time) ?>
           </p>
+          <?php if (!$upcomingAttendance->attendance_student): ?>
+            <a href="/student/schedule/<?= $upcomingAttendance->id ?>/absent"
+              class="w-fit bg-yellow-500 inline-block text-white px-3 py-1 mt-2 rounded-lg text-sm font-semibold hover:bg-yellow-600 transition duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+              Ajukan Izin
+            </a>
+          <?php endif; ?>
         <?php endif; ?>
       </div>
     </div>
@@ -78,10 +91,17 @@
     <div class="text-center py-4">
       <p>QR Code hanya berlaku 4 menit!</p>
 
-      <a href="/student/qr"
-        class="w-fit bg-blue-600 inline-block text-white px-3 py-1 mt-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
-        Lihat QR Code
+      <?php if ($upcomingAttendance): ?>
+        <a href="/student/qr"
+          class="w-fit bg-blue-600 inline-block text-white px-3 py-1 mt-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+          Lihat QR Code
         </a>
+      <?php else: ?>
+        <span
+          class="w-fit bg-blue-600 inline-block text-white px-3 py-1 mt-2 rounded-lg text-sm font-semibold transition duration-200 shadow-md opacity-50 cursor-not-allowed">
+          Tidak ada jadwal
+        </span>
+      <?php endif; ?>
     </div>
   </div>
 </div>

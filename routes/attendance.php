@@ -39,3 +39,19 @@ Router::post(
     [AuthMiddleware::class, "admin"]
   ]
 );
+
+Router::get("/student/schedule/{schedule_id}/absent", [AttendanceController::class, "absent"], [
+  [AuthMiddleware::class, "student"]
+]);
+
+Router::post("/student/schedule/absent", [AttendanceController::class, "absentPost"], [
+  [AuthMiddleware::class, "student"]
+]);
+
+Router::get("/attendance/success", [AttendanceController::class, "successAttendance"], [
+  [AuthMiddleware::class, "student"]
+]);
+
+Router::post("/attendance/checking", [StudentController::class, "checkAttendance"], [
+  [AuthMiddleware::class, "student"]
+]);

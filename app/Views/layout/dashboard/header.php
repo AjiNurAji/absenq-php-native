@@ -10,7 +10,7 @@
   <div class="flex items-center gap-3">
     <?php include __DIR__ . "/userDropdown.php" ?>
     <button id="hamburger-menu"
-      class="flex md:hidden items-center gap-2 border border-gray-300 px-4 py-2 rounded-md text-gray-600 hover:bg-gray-50 text-sm font-medium transition">
+      class="flex lg:hidden items-center gap-2 border border-gray-300 px-4 py-2 rounded-md text-gray-600 hover:bg-gray-50 text-sm font-medium transition">
       <i class="fa-solid fa-bars"></i>
     </button>
   </div>
