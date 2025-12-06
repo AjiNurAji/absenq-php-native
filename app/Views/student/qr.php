@@ -133,6 +133,7 @@
       body: JSON.stringify({ schedule_id: <?= $upcomingAttendance->id ?> })
     }).then(res => res.json()).then(res => {
       if (!res.checking) return lokced = false;
+      if (!res.checking.out_time) return locked = false;
 
       if (res.checking.in_time) {
         Toastify({
