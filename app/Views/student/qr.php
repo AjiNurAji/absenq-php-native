@@ -143,15 +143,15 @@
         window.location.href = "/attendance/success";
         lokced = false;
         return;
+      } else {
+        Toastify({
+          text: res.message + " masuk",
+          duration: 3000,
+          backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+        }).showToast();
+        lokced = false;
+        window.location.href = "/attendance/success";
       }
-
-      Toastify({
-        text: res.message + " masuk",
-        duration: 3000,
-        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
-      }).showToast();
-      lokced = false;
-      window.location.href = "/attendance/success";
     });
   }
 </script>
