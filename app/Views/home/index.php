@@ -35,7 +35,7 @@
         class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
         Mulai Sekarang
       </a>
-      <a href="https://github.com/ajinuraji/absenq" target="_blank"
+      <a href="https://github.com/ajinuraji/absenq-php-native" target="_blank"
         class="bg-white text-blue-600 border border-blue-600 hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition duration-300">
         Pelajari Lebih Lanjut
       </a>
