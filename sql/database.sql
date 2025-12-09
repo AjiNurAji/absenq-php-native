@@ -7,7 +7,7 @@ USE absenq;
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
-    role ENUM('admin','employee') NOT NULL,
+    role VARCHAR(10) NOT NULL,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW()
 );
@@ -16,7 +16,7 @@ CREATE TABLE class (
     id INT AUTO_INCREMENT PRIMARY KEY,
     class_name VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW()
-);
+);  
 
 CREATE TABLE students (
     student_id VARCHAR(15) PRIMARY KEY NOT NULL,
