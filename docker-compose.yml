@@ -36,7 +36,7 @@ services:
   depends_on:
    - mysql
   environment:
-   PMA_HOST: mysql-absenq
+   PMA_HOST: mysql
   container_name: phpmyadmin-absenq
 
 volumes:
