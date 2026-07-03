@@ -1,97 +1,95 @@
-# <center>AbsenQ <br><p style="font-size: 20px; font-weight: normal;">QR Code-Based Attendance System</p></center>
+# AbsenQ
 
-AbsenQ is a modern QR Code-based attendance application designed for university lectures and classes. Students generate their own QR codes, which remain valid for 4 minutes, and lecturers can scan them using any device.
-This application was built to fulfill the final project for the Basic Web Programming course, taught by Khaerul Anam, M.Kom.
+AbsenQ is a QR code-based attendance system designed for classrooms and lectures. Students generate their own QR code, which remains valid for a short time, while lecturers can scan it using a laptop or phone camera to mark attendance quickly.
 
-The application includes the following features:
-- Time-limited QR Codes (4 minutes validity)
-- Anti-reuse QR (the token is recorded only once)
-- Real-time synchronized countdown with the server
-- QR scanning via laptop or mobile phone cameras
+This project was built as a final assignment for a basic web programming course and uses a lightweight native PHP MVC structure with MySQL.
+
+## Demo Gallery
+Here are some screenshots from the application:
+
+![Admin QR scan screen](demo/admin-scan-qr.png)
+
+![Admin dashboard](demo/dashbboard-admin.png)
+
+![Student dashboard](demo/dashboard-student.png)
+
+![Student attendance success state](demo/dashboard-student-if-success.png)
+
+![Used QR warning](demo/if-qr-used.png)
+
+![Student QR generation page](demo/QR-page-for-scan-to-admin.png)
+
+![Schedule list](demo/schedule-list.png)
+
+## Features
+- Time-limited QR codes with a short validity window
+- One-time QR usage to prevent duplicate attendance
+- Real-time countdown synchronization with the server
+- Camera-based scanning from desktop or mobile devices
 - Check-in and check-out validation
-- Student dashboard: recent attendance & upcoming schedules
-- Middleware for authentication and role management
-- Simple custom MVC Router
-- Weekly statistics for charting purposes
+- Student dashboard with recent attendance and upcoming schedules
+- Authentication and role-based middleware
+- Simple custom MVC router
 
-## ⚙️ Tech Stack
-- **BackEnd**
-  - PHP 8.4+
-  - Native PHP
-  - Composer
-  - PDO MySQL
-  - Endroid/QrCode
-- **FrontEnd**
-  - Tailwind CSS
-  - HTML5 + JavaScript
-  - html5-qrcode (library for reading QR Codes)
-- **Database**
-  - MySQL 5.7 / MariaDB 10+
+## Tech Stack
+- Backend: PHP 8.4+, Composer, PDO MySQL, native MVC architecture
+- QR generation: Endroid QR Code
+- Frontend: HTML, CSS, JavaScript
+- Environment: Docker, Apache, MySQL, phpMyAdmin
 
-## 📁 Folder Structure
-``` mdx
-absenq
-|_ app
-|  |_ Controllers
-|  |_ Core
-|  |_ Helpers
-|  |_ Middlewares
-|  |_ Models
-|  |_ Views
-|_ docker
-|  |_ apache
-|  |  |_ 000-default.conf
-|_ public
-|  |_ assets
-|  | |_ css
-|  | |_ js
-|  |_ index.php
-|_ routes
-|  |_ web.php
-|_ storage
-|  |_ qr
-|_ vendor
+## Project Structure
+```text
+absenq/
+├── app/
+│   ├── Controllers/
+│   ├── Core/
+│   ├── Helpers/
+│   ├── Middlewares/
+│   ├── Models/
+│   └── Views/
+├── demo/
+│   └── index.html
+├── docker/
+├── public/
+├── routes/
+├── sql/
+└── storage/
 ```
 
-## 📦 Installation & Setup (Docker Desktop)
-1. Clone the Repository
-``` bash
-git clone [https://github.com/ajinuraji/absen-php-native.git](https://github.com/ajinuraji/absen-php-native.git) absenq
+## Installation and Setup
+### 1. Clone the repository
+```bash
+git clone https://github.com/ajinuraji/absen-php-native.git absenq
 cd absenq
 ```
-2. Setup
-``` bash
-docker-compose up --build -d
+
+### 2. Start the containers
+```bash
+docker compose up --build -d
 ```
-3. Database Setup
-- Open the following phpMyAdmin URL in your browser:
-  ``` web
-  http://localhost:8081
-  ```
-  Log in using the username and password specified in the `docker-compose.yml` file.
-- Import database/database.sql into phpMyAdmin.
-4. Configure the Environment File.
-- Copy the `.env.example` file rename it to `.env`.
-- Fill in the required configurations in `.env`:
-  ``` env
-  APP_NAME=AbsenQ
-  APP_URL=http://localhost
-  
-  DB_HOST=localhost
-  DB_NAME=absenq
-  DB_USER=root
-  DB_PASS=
-  ```
-5. Access the application via `https://localhost:8000`.
-6. Log in as an admin using the default credentials: username `admin` and password `admin`.
 
-## 🤝 Contributors
-- Aji Nur Aji.
-- Indah Suci Ramadani.
-- Nessya Cipto Meilody.
+### 3. Prepare the database
+- Open phpMyAdmin at http://localhost:8081
+- Import the SQL file from [sql/database.sql](sql/database.sql)
+- The script creates the `absenq` database and the default admin account
 
-<p>Pull requests are welcome. Please create an issue for bugs or new feature requests.</p>
+### 4. Configure the environment
+A workspace environment file is already included. If needed, update the values in [.env](.env) to match your local setup.
 
----
-## 📜 License
-MIT License.
+### 5. Open the app
+Visit http://localhost:8000
+
+### 6. Log in
+Default credentials:
+- Username: `admin`
+- Password: `admin`
+
+## Contributors
+- Aji Nur Aji
+- Indah Suci Ramadani
+- Nessya Cipto Meilody
+
+Pull requests are welcome. Please open an issue for bugs or feature requests.
+
+## License
+MIT License
