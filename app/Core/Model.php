@@ -13,9 +13,9 @@ class Model
     if (!self::$db) {
       $host = Env::get('DB_HOST', 'localhost');
       $port = Env::get('DB_PORT', '3306');
-      $database = Env::get('DB_DATABASE', 'database');
-      $username = Env::get('DB_USERNAME', 'root');
-      $password = Env::get('DB_PASSWORD', '');
+      $database = Env::get('DB_NAME', 'database');
+      $username = Env::get('DB_USER', 'root');
+      $password = Env::get('DB_PASS', '');
 
       $dsn = "mysql:host=$host;port=$port;dbname=$database;charset=utf8mb4";
       $opts = [
