@@ -1,4 +1,4 @@
-<div class="relative w-full">
+<div class="relative w-full z-999">
   <button id="trigger-profile"
     class="flex items-center gap-1 bg-transparent rounded-md overflow-hidden py-1 px-2 hover:bg-gray-500/5 transition duration-300 ease-in outline-none">
     <div class="size-10 flex justify-center items-center text-xl bg-green-500/15 rounded-full block">
