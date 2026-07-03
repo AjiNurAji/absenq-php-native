@@ -86,11 +86,12 @@ docker-compose up --build -d
 6. Log in as an admin using the default credentials: username `admin` and password `admin`.
 
 ## 🤝 Contributors
-- Aji Nur Aji
-- Indah Suci Ramadani
-- Nessya Cipto Meilody
+- Aji Nur Aji.
+- Indah Suci Ramadani.
+- Nessya Cipto Meilody.
 
-Pull requests are welcome. Please create an issue for bugs or new feature requests.
+<p>Pull requests are welcome. Please create an issue for bugs or new feature requests.</p>
+
 ---
 ## 📜 License
 MIT License.
