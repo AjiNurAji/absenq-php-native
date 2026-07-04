@@ -7,19 +7,19 @@ This project was built as a final assignment for a basic web programming course 
 ## Demo Gallery
 Here are some screenshots from the application:
 
-![Admin QR scan screen](demo/admin-scan-qr.png)
+![Admin QR scan screen](https://raw.githubusercontent.com/AjiNurAji/absenq-php-native/refs/heads/main/demo/admin-scan-qr.png)
 
-![Admin dashboard](demo/dashbboard-admin.png)
+![Admin dashboard](https://raw.githubusercontent.com/AjiNurAji/absenq-php-native/refs/heads/main/demo/dashbboard-admin.png)
 
-![Student dashboard](demo/dashboard-student.png)
+![Student dashboard](https://raw.githubusercontent.com/AjiNurAji/absenq-php-native/refs/heads/main/demo/dashboard-student.png)
 
-![Student attendance success state](demo/dashboard-student-if-success.png)
+![Student attendance success state](https://raw.githubusercontent.com/AjiNurAji/absenq-php-native/refs/heads/main/demo/dashboard-student-if-success.png)
 
 ![Used QR warning](demo/if-qr-used.png)
 
-![Student QR generation page](demo/QR-page-for-scan-to-admin.png)
+![Student QR generation page](https://raw.githubusercontent.com/AjiNurAji/absenq-php-native/refs/heads/main/demo/QR-page-for-scan-to-admin.png)
 
-![Schedule list](demo/schedule-list.png)
+![Schedule list](https://raw.githubusercontent.com/AjiNurAji/absenq-php-native/refs/heads/main/demo/schedule-list.png)
 
 ## Features
 - Time-limited QR codes with a short validity window
