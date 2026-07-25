@@ -15,7 +15,7 @@ Here are some screenshots from the application:
 
 ![Student attendance success state](https://raw.githubusercontent.com/AjiNurAji/absenq-php-native/refs/heads/main/demo/dashboard-student-if-success.png)
 
-![Used QR warning](demo/if-qr-used.png)
+![Used QR warning](https://raw.githubusercontent.com/AjiNurAji/absenq-php-native/refs/heads/main/demo/if-qr-used.png)
 
 ![Student QR generation page](https://raw.githubusercontent.com/AjiNurAji/absenq-php-native/refs/heads/main/demo/QR-page-for-scan-to-admin.png)
 
